@@ -1,0 +1,25 @@
+int led = D7;
+int photoresistor = A5;
+int analogValue;
+
+
+void setup() {
+  pinMode(led, OUTPUT);
+  pinMode(photoresistor, INPUT);
+}
+
+void loop() {
+  analogValue = analogRead(photoresistor);
+  if(analogValue > 25 ) {
+      digitalWrite(led, LOW);
+      
+      Particle.publish("light_State", "Up");
+  } 
+  if(analogValue < 25 ) {
+      digitalWrite(led, HIGH);
+      
+      Particle.publish("light_State", "Down");
+  }
+  delay(60000); 
+  
+}
